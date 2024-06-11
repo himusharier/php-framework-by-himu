@@ -14,8 +14,10 @@ require('language/language-settings.php'); //language
 require('functions/input-sanitizer.php');
 require('functions/db-connection-check.php');
 require('functions/html-page-header.php');
-require('token/jwt-token.php');
 require('functions/api-error-messages.php');
+
+//include authentications here:
+require('token/jwt-token.php');
 
 //add alpha pages:
 if (!dbConnectionCheck()) { //check database connection:

@@ -1,4 +1,6 @@
 <?php
+global $url;
+
 //session started here:
 session_start();
 session_regenerate_id(true);
@@ -19,7 +21,7 @@ require('functions/api-error-messages.php');
 //include authentications here:
 require('token/jwt-token.php');
 
-//add alpha pages:
+//add controller pages here:
 if (!dbConnectionCheck()) { //check database connection:
     require("database/database-settings.php");
     exit();

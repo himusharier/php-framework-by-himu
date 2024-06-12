@@ -1,4 +1,6 @@
 <?php
+global $url;
+
 //add all website pages here with sub-pages as well:
 switch ($url[0]) {
     case '':
@@ -8,6 +10,16 @@ switch ($url[0]) {
         switch ($url[1]) {
             case '':
                 require_once 'pages/public/public-about-page.php';
+                break;
+            default:
+                require_once 'pages/404-page.php';
+                break;
+        }
+        break;
+    case 'contact':
+        switch ($url[1]) {
+            case '':
+                require_once 'pages/public/public-contact-page.php';
                 break;
             default:
                 require_once 'pages/404-page.php';

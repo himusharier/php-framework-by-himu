@@ -1,4 +1,6 @@
 <?php
+global $db;
+
 //define method header:
 header('Access-Control-Allow-Method: GET');
 
@@ -26,5 +28,5 @@ if ($query_run) {
     }
 
 } else {
-    return errorInternal();
+    errorInternal();
 }

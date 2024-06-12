@@ -1,4 +1,6 @@
 <?php
+global $url;
+
 //default header:
 header('Access-Control-Allow-Origin:*');
 header('Content-Type: application/json');
@@ -7,18 +9,30 @@ header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $versions = "$url[0]/$url[1]";
 
-if ($versions == "api/v1") {
+switch ($versions) {
+    case "api/v1":
+        switch ($requestMethod) {
+            case "GET":
+                if ($url[2] == "show-subject-area") {
+                    require("$versions/show-subject-area.php");
+                    exit(); // Exit after handling the request
+                }
+                else {errorInternal();}
 
-    if ($requestMethod == "GET" && $url[2] == "show_subject_area") { //get: all subject area
-        require("$versions/show-subject-area.php");
+                break;
+            case "POST":
+                if ($url[2] == "add-subject-area") {
+                    require("$versions/add-subject-area.php");
+                    exit(); // Exit after handling the request
+                }
+                else {errorInternal();}
 
-    } elseif ($requestMethod == "POST" && $url[2] == "add_subject_area") { //post: new subject area
-        require("$versions/add-subject-area.php");
-
-    } else {
-        return errorMethod($requestMethod);
-    }
-
-} else {
-    return errorForbidden();
+                break;
+            default:
+                errorMethod($requestMethod);
+        }
+        break;
+    default:
+        errorForbidden();
 }
+

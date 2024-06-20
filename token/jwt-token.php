@@ -1,6 +1,8 @@
 <?php
+global $token;
+
 // Define a key here:
-$key = 'W5hTcRg9Z8wvX7BxM2yDqCjN5FkHhVfYjUgR3rW6uT4eS7xZ2vM5jS7xV8yN3QwP';
+$key = $token;
 
 function base64url_encode($data) {
     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');

@@ -20,15 +20,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $db_user = clean_inputs($_POST['db-user']);
             $db_pass = clean_inputs($_POST['db-pass']);
             $db_host = clean_inputs($_POST['db-host']);
+            $jwt_key = bin2hex(random_bytes(32));
 
             $db_config_file = "<?php
 error_reporting(0);
+
 define('DB_HOST', '$db_host');
 define('DB_USER', '$db_user');
 define('DB_PASS', '$db_pass');
 define('DB_NAME', '$db_name');
 \$db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-mysqli_set_charset(\$db, 'utf8');";
+mysqli_set_charset(\$db, 'utf8');
+
+\$token = '$jwt_key';
+";
 
             $file_name = fopen('database/database-connection.php', 'wb');
             if (fwrite($file_name, $db_config_file)) {

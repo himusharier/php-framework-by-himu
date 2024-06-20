@@ -21,6 +21,9 @@ require('functions/api-error-messages.php');
 //include authentications here:
 require('token/jwt-token.php');
 
+//include mail service here:
+require('mail/mail-server-config.php');
+
 //add controller pages here:
 if (!dbConnectionCheck()) { //check database connection:
     require("database/database-settings.php");

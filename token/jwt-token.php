@@ -1,8 +1,8 @@
 <?php
-global $token;
+global $key;
 
 // Define a key here:
-$key = $token;
+$jwt_key = $key;
 
 function base64url_encode($data) {
     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
@@ -23,7 +23,7 @@ function generate_jwt($payload, $expire){
     $payload_encoded = base64url_encode(json_encode($payload));
 
     //Signature
-    $signature = hash_hmac('SHA256',$headers_encoded.$payload_encoded, $key);
+    $signature = hash_hmac('SHA256',$headers_encoded.$payload_encoded, $jwt_key);
     $signature_encoded = base64url_encode($signature);
 
     //Token
@@ -37,7 +37,7 @@ function verify_jwt($token){
     $token_parts = explode('.', $token);
 
     //Verify Signature
-    $signature = base64url_encode(hash_hmac('SHA256',$token_parts[0].$token_parts[1], $key));
+    $signature = base64url_encode(hash_hmac('SHA256',$token_parts[0].$token_parts[1], $jwt_key));
     if($signature != $token_parts[2]){
         return false;
     }

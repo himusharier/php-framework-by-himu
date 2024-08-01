@@ -32,7 +32,7 @@ define('DB_NAME', '$db_name');
 \$db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 mysqli_set_charset(\$db, 'utf8');
 
-\$token = '$jwt_key';
+\$key = '$jwt_key';
 ";
 
             $file_name = fopen('database/database-connection.php', 'wb');
